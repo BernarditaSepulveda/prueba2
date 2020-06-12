@@ -17,25 +17,22 @@ end
 
 data = get_data(url, api_key)
 
-def request(url, api_key)[0...100]
-    photos = data.map{|x| x['url']}
-    html = ""
-    photos.each do |photos|
-    html += "<img src=\"#{photo}\">\n"
+photos = data['photos'].map{|x| x['img_src']}
+
+def build_web_page(photos)
+    html="<html>"
+    html+="<head>"
+    html+="</head>"
+    html+="<body>"
+    html+="<ul>"
+    photos.each do |photo|
+      html+="<li><img src=\"#{photo}\"></li>\n"
     end
-end
-
-File.write('./index.html', data)
-
-
-# def build_web_page(data)
-#     data.each do |k, v|
-#         if k == 'photos'
-#             data.each do |k, v|
-#                 if k == 'img_src'
-#                 print v 
-#                 end
-#             end
-#         end
-#     end
-# end
+    html+="</ul>"
+    html+="</body>"
+    html+="</html>"
+    File.write('output.html', html)
+  end
+  
+  build_web_page(photos)
+  
