@@ -2,10 +2,11 @@ require 'net/http'
 require 'openssl'
 require 'json'
 
-url = 'https://api.nasa.gov/planetary/earth/assets?lon=100.75&lat=1.5&date=2014-02-01&dim=0.15&api_key=DEMO_KEY'
+url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key='
+api_key = '0ecNTq6ZU792tirZ6bBKS3M3bWKGE8DJAdeYSOE9'
 
-def get_data(url)
-    uri = URI(url)
+def get_data(url,api_key)
+    uri = URI(url + api_key)
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Get.new(uri)
     http.use_ssl = true
@@ -14,9 +15,10 @@ def get_data(url)
     JSON.parse(response.read_body)
 end
 
-data = get_data(url)
+data = get_data(url, api_key)
 
 print data
+
 
 # File.write('./index.html', 
 
