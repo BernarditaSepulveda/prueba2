@@ -19,8 +19,7 @@ data = get_data(url, api_key)
 
 print data
 
-
-# File.write('./index.html', 
+File.write('./index.html', data) 
 
 # n_externo = ARGV[0].to_i
 # n_interno = ARGV[1].to_i
